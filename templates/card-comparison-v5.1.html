@@ -1,0 +1,501 @@
+     1|<!DOCTYPE html>
+     2|<html lang="vi">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=1080, height=1920">
+     6|<title>v5.1 Card-Comparison Template</title>
+     7|<!--
+     8|  ╔══════════════════════════════════════════════════════════════╗
+     9|  ║  v5.1 CARD-COMPARISON SLIDE TEMPLATE — Premium Design      ║
+    10|  ║  Copy the <style> and <script> blocks into your video HTML  ║
+    11|  ║  Then pick the slide pattern(s) you need.                   ║
+    12|  ║                                                              ║
+    13|  ║  DESIGN SYSTEM v5.1:                                         ║
+    14|  ║  - Typography: h1=82px, h2=52px, h3=40px, p=36px, sub=28px ║
+    15|  ║  - Cards: glassmorphism + accent borders + neon glow        ║
+    16|  ║  - Accent words: larger + neon text-shadow                   ║
+    17|  ║  - JS-driven staggered reveal, NO CSS transitions           ║
+    18|  ║  - Vertical fill: content spans 85%+ of screen              ║
+    19|  ╚══════════════════════════════════════════════════════════════╝
+    20|-->
+    21|<style>
+    22|* { margin: 0; padding: 0; box-sizing: border-box; }
+    23|body {
+    24|  width: 1080px;
+    25|  height: 1920px;
+    26|  overflow: hidden;
+    27|  background: #0a0a12;
+    28|  font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    29|  color: #f0f0f5;
+    30|}
+    31|
+    32|/* === BACKGROUND: radial gradient fills corners === */
+    33|.bg-gradient {
+    34|  position: fixed; top: 0; left: 0; width: 1080px; height: 1920px; z-index: 0; pointer-events: none;
+    35|  background:
+    36|    radial-gradient(ellipse 800px 600px at 10% 15%, rgba(0,245,212,0.06) 0%, transparent 70%),
+    37|    radial-gradient(ellipse 600px 800px at 90% 85%, rgba(191,90,242,0.06) 0%, transparent 70%),
+    38|    radial-gradient(ellipse 500px 500px at 50% 50%, rgba(255,45,85,0.03) 0%, transparent 70%),
+    39|    #0a0a12;
+    40|}
+    41|
+    42|/* === PROGRESS BAR === */
+    43|.progress-bar {
+    44|  position: fixed; bottom: 0; left: 0; height: 6px; z-index: 100;
+    45|  background: linear-gradient(90deg, #00f5d4, #bf5af2, #ff2d55);
+    46|  border-radius: 0 3px 3px 0;
+    47|  width: 0%;
+    48|}
+    49|
+    50|/* === SLIDE CONTAINER === */
+    51|.slide {
+    52|  display: none;
+    53|  position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; z-index: 10;
+    54|}
+    55|.slide.active { display: flex; }
+    56|
+    57|.slide-content {
+    58|  display: flex;
+    59|  flex-direction: column;
+    60|  width: 100%;
+    61|  height: 100%;
+    62|  padding: 100px 72px 120px; /* top 100px, sides 72px, bottom 120px for progress bar */
+    63|}
+    64|
+    65|/* === BADGE: slide number === */
+    66|.badge {
+    67|  display: inline-flex;
+    68|  align-items: center;
+    69|  gap: 8px;
+    70|  background: rgba(255,255,255,0.06);
+    71|  border: 1px solid rgba(255,255,255,0.1);
+    72|  border-radius: 40px;
+    73|  padding: 10px 24px;
+    74|  font-size: 24px;
+    75|  font-weight: 600;
+    76|  color: rgba(240,240,245,0.5);
+    77|  margin-bottom: 40px;
+    78|  width: fit-content;
+    79|  letter-spacing: 2px;
+    80|}
+    81|.badge .badge-num { color: #00f5d4; font-weight: 700; }
+    82|
+    83|/* === HEADLINE === */
+    84|.h1 {
+    85|  font-size: 82px;
+    86|  font-weight: 900;
+    87|  line-height: 1.08;
+    88|  color: #f0f0f5;
+    89|  margin-bottom: 24px;
+    90|  max-width: 940px;
+    91|}
+    92|.h2 {
+    93|  font-size: 52px;
+    94|  font-weight: 800;
+    95|  line-height: 1.12;
+    96|  color: #f0f0f5;
+    97|  margin-bottom: 20px;
+    98|}
+    99|.subtitle {
+   100|  font-size: 36px;
+   101|  color: rgba(240,240,245,0.55);
+   102|  line-height: 1.4;
+   103|  margin-bottom: 56px;
+   104|}
+   105|
+   106|/* === ACCENT COLORS === */
+   107|.neon-cyan { color: #00f5d4; text-shadow: 0 0 40px rgba(0,245,212,0.35), 0 0 80px rgba(0,245,212,0.15); }
+   108|.neon-purple { color: #bf5af2; text-shadow: 0 0 40px rgba(191,90,242,0.35), 0 0 80px rgba(191,90,242,0.15); }
+   109|.neon-pink { color: #ff2d55; text-shadow: 0 0 40px rgba(255,45,85,0.35), 0 0 80px rgba(255,45,85,0.15); }
+   110|.neon-green { color: #30d158; text-shadow: 0 0 40px rgba(48,209,88,0.35), 0 0 80px rgba(48,209,88,0.15); }
+   111|.neon-orange { color: #ff9f0a; text-shadow: 0 0 40px rgba(255,159,10,0.35), 0 0 80px rgba(255,159,10,0.15); }
+   112|
+   113|.accent-big {
+   114|  font-size: 44px;
+   115|  font-weight: 900;
+   116|}
+   117|
+   118|/* === CARD STYLES === */
+   119|.cards-col {
+   120|  display: flex;
+   121|  flex-direction: column;
+   122|  gap: 32px;
+   123|  flex: 1;
+   124|  justify-content: center;
+   125|}
+   126|
+   127|.card {
+   128|  background: rgba(255,255,255,0.04);
+   129|  backdrop-filter: blur(20px);
+   130|  -webkit-backdrop-filter: blur(20px);
+   131|  border-radius: 24px;
+   132|  padding: 40px 44px;
+   133|  border: 1px solid rgba(255,255,255,0.08);
+   134|  position: relative;
+   135|  overflow: hidden;
+   136|}
+   137|
+   138|/* Accent left border */
+   139|.card::before {
+   140|  content: '';
+   141|  position: absolute;
+   142|  left: 0; top: 24px; bottom: 24px;
+   143|  width: 4px;
+   144|  border-radius: 0 4px 4px 0;
+   145|}
+   146|.card-accent-cyan::before { background: #00f5d4; box-shadow: 0 0 12px rgba(0,245,212,0.5); }
+   147|.card-accent-purple::before { background: #bf5af2; box-shadow: 0 0 12px rgba(191,90,242,0.5); }
+   148|.card-accent-pink::before { background: #ff2d55; box-shadow: 0 0 12px rgba(255,45,85,0.5); }
+   149|.card-accent-green::before { background: #30d158; box-shadow: 0 0 12px rgba(48,209,88,0.5); }
+   150|.card-accent-orange::before { background: #ff9f0a; box-shadow: 0 0 12px rgba(255,159,10,0.5); }
+   151|
+   152|/* Card accent border glow */
+   153|.card-accent-cyan { border-color: rgba(0,245,212,0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 0 40px rgba(0,245,212,0.03); }
+   154|.card-accent-purple { border-color: rgba(191,90,242,0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 0 40px rgba(191,90,242,0.03); }
+   155|.card-accent-pink { border-color: rgba(255,45,85,0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 0 40px rgba(255,45,85,0.03); }
+   156|.card-accent-green { border-color: rgba(48,209,88,0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 0 40px rgba(48,209,88,0.03); }
+   157|.card-accent-orange { border-color: rgba(255,159,10,0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 0 40px rgba(255,159,10,0.03); }
+   158|
+   159|.card-label {
+   160|  font-size: 24px;
+   161|  font-weight: 700;
+   162|  letter-spacing: 3px;
+   163|  margin-bottom: 12px;
+   164|  text-transform: uppercase;
+   165|}
+   166|.label-cyan { color: #00f5d4; }
+   167|.label-purple { color: #bf5af2; }
+   168|.label-pink { color: #ff2d55; }
+   169|.label-green { color: #30d158; }
+   170|.label-orange { color: #ff9f0a; }
+   171|
+   172|.card-body {
+   173|  font-size: 34px;
+   174|  line-height: 1.5;
+   175|  color: rgba(240,240,245,0.85);
+   176|}
+   177|
+   178|/* === CARD WITH ICON (feature card) === */
+   179|.card-with-icon {
+   180|  display: flex;
+   181|  align-items: flex-start;
+   182|  gap: 28px;
+   183|}
+   184|.card-icon-box {
+   185|  width: 72px; height: 72px;
+   186|  border-radius: 18px;
+   187|  display: flex;
+   188|  align-items: center;
+   189|  justify-content: center;
+   190|  flex-shrink: 0;
+   191|}
+   192|.icon-box-cyan { background: rgba(0,245,212,0.12); border: 1px solid rgba(0,245,212,0.25); }
+   193|.icon-box-purple { background: rgba(191,90,242,0.12); border: 1px solid rgba(191,90,242,0.25); }
+   194|.icon-box-green { background: rgba(48,209,88,0.12); border: 1px solid rgba(48,209,88,0.25); }
+   195|.icon-box-pink { background: rgba(255,45,85,0.12); border: 1px solid rgba(255,45,85,0.25); }
+   196|.icon-box-orange { background: rgba(255,159,10,0.12); border: 1px solid rgba(255,159,10,0.25); }
+   197|
+   198|.card-text-block { flex: 1; }
+   199|
+   200|/* === COMPARISON: 2-column before/after === */
+   201|.compare-row {
+   202|  display: flex;
+   203|  gap: 24px;
+   204|  flex: 1;
+   205|  align-items: stretch;
+   206|}
+   207|.compare-col {
+   208|  flex: 1;
+   209|  display: flex;
+   210|  flex-direction: column;
+   211|}
+   212|
+   213|/* === STATS row === */
+   214|.stats-row {
+   215|  display: flex;
+   216|  justify-content: space-around;
+   217|  gap: 40px;
+   218|  flex: 1;
+   219|  align-items: center;
+   220|}
+   221|.stat-block { text-align: center; }
+   222|.stat-number {
+   223|  font-size: 88px;
+   224|  font-weight: 900;
+   225|  line-height: 1;
+   226|}
+   227|.stat-label {
+   228|  font-size: 28px;
+   229|  color: rgba(240,240,245,0.6);
+   230|  margin-top: 12px;
+   231|}
+   232|.stat-sub {
+   233|  font-size: 22px;
+   234|  color: rgba(240,240,245,0.4);
+   235|  margin-top: 4px;
+   236|}
+   237|
+   238|/* === ARROW between stats === */
+   239|.stat-arrow {
+   240|  font-size: 48px;
+   241|  color: rgba(240,240,245,0.3);
+   242|  font-weight: 900;
+   243|}
+   244|</style>
+   245|</head>
+   246|<body>
+   247|
+   248|<div class="bg-gradient"></div>
+   249|<div class="progress-bar" id="progressBar"></div>
+   250|
+   251|<!-- ============================================================
+   252|     PATTERN A: Comparison Cards (like Opus 4.6 vs 4.7)
+   253|     Use when: comparing 2-3 versions, before/after, pros vs cons
+   254|     ============================================================ -->
+   255|<div class="slide" id="s0">
+   256|  <div class="slide-content">
+   257|    <div class="badge"><span class="badge-num">01</span> / 06</div>
+   258|    <h1 class="h1">Nó đọc prompt <span class="neon-cyan accent-big">khác hẳn</span></h1>
+   259|    <p class="subtitle">Opus 4.7 tuân thủ instruction sát nghĩa hơn</p>
+   260|    <div class="cards-col">
+   261|      <div class="card card-accent-pink" id="c0-0">
+   262|        <div class="card-label label-pink">OPUS 4.6</div>
+   263|        <div class="card-body">Prompt lỏng lẻo? Tự hiểu bỏ qua, làm <span class="neon-pink accent-big">"đúng ý"</span></div>
+   264|      </div>
+   265|      <div class="card card-accent-cyan" id="c0-1">
+   266|        <div class="card-label label-cyan">OPUS 4.7</div>
+   267|        <div class="card-body">Làm <span class="neon-cyan accent-big">đúng từng chữ</span> — kết quả khác mong đợi</div>
+   268|      </div>
+   269|      <div class="card card-accent-orange" id="c0-2">
+   270|        <div class="card-label label-orange">HÀM Ý</div>
+   271|        <div class="card-body">Phải viết lại prompt + <span class="neon-orange accent-big">harness!</span></div>
+   272|      </div>
+   273|    </div>
+   274|  </div>
+   275|</div>
+   276|
+   277|<!-- ============================================================
+   278|     PATTERN B: Feature Cards with Icons (like Vision x3)
+   279|     Use when: showcasing 3 features/capabilities with icons
+   280|     ============================================================ -->
+   281|<div class="slide" id="s1">
+   282|  <div class="slide-content">
+   283|    <div class="badge"><span class="badge-num">02</span> / 06</div>
+   284|    <h1 class="h1">Vision x3 — Không chỉ xem <span class="neon-cyan accent-big">đẹp hơn</span></h1>
+   285|    <p class="subtitle">2576 pixel long edge, gấp 3 lần trước</p>
+   286|    <div class="cards-col">
+   287|      <div class="card card-accent-cyan" id="c1-0">
+   288|        <div class="card-with-icon">
+   289|          <div class="card-icon-box icon-box-cyan">
+   290|            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00f5d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+   291|          </div>
+   292|          <div class="card-text-block">
+   293|            <div class="card-label label-cyan">COMPUTER-USE</div>
+   294|            <div class="card-body">Agent đọc screenshot <span class="neon-cyan accent-big">chi tiết</span></div>
+   295|          </div>
+   296|        </div>
+   297|      </div>
+   298|      <div class="card card-accent-purple" id="c1-1">
+   299|        <div class="card-with-icon">
+   300|          <div class="card-icon-box icon-box-purple">
+   301|            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#bf5af2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+   302|          </div>
+   303|          <div class="card-text-block">
+   304|            <div class="card-label label-purple">DATA EXTRACT</div>
+   305|            <div class="card-body">Extract data từ sơ đồ <span class="neon-purple accent-big">phức tạp</span></div>
+   306|          </div>
+   307|        </div>
+   308|      </div>
+   309|      <div class="card card-accent-green" id="c1-2">
+   310|        <div class="card-with-icon">
+   311|          <div class="card-icon-box icon-box-green">
+   312|            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+   313|          </div>
+   314|          <div class="card-text-block">
+   315|            <div class="card-label label-green">BENCHMARK</div>
+   316|            <div class="card-body">XBOW visual-acuity: <span class="neon-green accent-big">54% → 98%</span></div>
+   317|          </div>
+   318|        </div>
+   319|      </div>
+   320|    </div>
+   321|  </div>
+   322|</div>
+   323|
+   324|<!-- ============================================================
+   325|     PATTERN C: Stats with Animated Counter
+   326|     Use when: showing big numbers, percentages, comparisons
+   327|     ============================================================ -->
+   328|<div class="slide" id="s2">
+   329|  <div class="slide-content">
+   330|    <div class="badge"><span class="badge-num">03</span> / 06</div>
+   331|    <h1 class="h1">Kết quả <span class="neon-green accent-big">thật sự</span> ấn tượng</h1>
+   332|    <p class="subtitle">Benchmark cho thấy sự khác biệt rõ ràng</p>
+   333|    <div class="stats-row">
+   334|      <div class="stat-block" id="stat0">
+   335|        <div id="counter1" class="stat-number neon-cyan">0</div>
+   336|        <div class="stat-label">Tokens/giây</div>
+   337|        <div class="stat-sub">Throughput</div>
+   338|      </div>
+   339|      <div class="stat-arrow">→</div>
+   340|      <div class="stat-block" id="stat1">
+   341|        <div id="counter2" class="stat-number neon-green">0</div>
+   342|        <div class="stat-label">% Accuracy</div>
+   343|        <div class="stat-sub">XBOW Visual</div>
+   344|      </div>
+   345|      <div class="stat-arrow">→</div>
+   346|      <div class="stat-block" id="stat2">
+   347|        <div id="counter3" class="stat-number neon-purple">0</div>
+   348|        <div class="stat-label">x Nhanh hơn</div>
+   349|        <div class="stat-sub">So với bản trước</div>
+   350|      </div>
+   351|    </div>
+   352|  </div>
+   353|</div>
+   354|
+   355|<!-- ============================================================
+   356|     PATTERN D: Before/After Split
+   357|     Use when: contrasting old vs new, problem vs solution
+   358|     ============================================================ -->
+   359|<div class="slide" id="s3">
+   360|  <div class="slide-content">
+   361|    <div class="badge"><span class="badge-num">04</span> / 06</div>
+   362|    <h1 class="h1">Trước vs Sau — <span class="neon-pink accent-big">khác biệt</span> rõ ràng</h1>
+   363|    <p class="subtitle">So sánh trực quan hai phiên bản</p>
+   364|    <div class="cards-col">
+   365|      <div class="compare-row">
+   366|        <div class="compare-col" id="ba-before">
+   367|          <div class="card card-accent-pink" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+   368|            <div class="card-label label-pink" style="text-align:center; margin-bottom:20px;">TRƯỚC</div>
+   369|            <div class="card-body" style="text-align:center;">
+   370|              • Làm thủ công<br/>
+   371|              • Mất <span class="neon-pink accent-big">8 tiếng</span><br/>
+   372|              • Lỗi nhiều<br/>
+   373|              • Không scale
+   374|            </div>
+   375|          </div>
+   376|        </div>
+   377|        <div class="compare-col" id="ba-after">
+   378|          <div class="card card-accent-green" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+   379|            <div class="card-label label-green" style="text-align:center; margin-bottom:20px;">SAU</div>
+   380|            <div class="card-body" style="text-align:center;">
+   381|              • <span class="neon-green accent-big">Tự động</span> hóa<br/>
+   382|              • Chỉ 10 phút<br/>
+   383|              • Chính xác 99%<br/>
+   384|              • Scale thoải mái
+   385|            </div>
+   386|          </div>
+   387|        </div>
+   388|      </div>
+   389|    </div>
+   390|  </div>
+   391|</div>
+   392|
+   393|<!-- ============================================================
+   394|     PATTERN E: Flow Steps (Horizontal or Vertical)
+   395|     Use when: showing a process, pipeline, or sequential steps
+   396|     ============================================================ -->
+   397|<div class="slide" id="s4">
+   398|  <div class="slide-content">
+   399|    <div class="badge"><span class="badge-num">05</span> / 06</div>
+   400|    <h1 class="h1">Quy trình <span class="neon-purple accent-big">3 bước</span></h1>
+   401|    <p class="subtitle">Từ ý tưởng đến kết quả chỉ trong vài phút</p>
+   402|    <div class="cards-col" style="justify-content: center; gap: 36px;">
+   403|      <div class="card card-accent-cyan" id="step0">
+   404|        <div class="card-with-icon">
+   405|          <div class="card-icon-box icon-box-cyan" style="font-size:32px; font-weight:900; color:#00f5d4; width:80px; height:80px; border-radius:50%;">01</div>
+   406|          <div class="card-text-block">
+   407|            <div class="card-label label-cyan">BƯỚC 1</div>
+   408|            <div class="card-body">Viết prompt <span class="neon-cyan accent-big">chi tiết</span> cho AI</div>
+   409|          </div>
+   410|        </div>
+   411|      </div>
+   412|      <div class="card card-accent-purple" id="step1">
+   413|        <div class="card-with-icon">
+   414|          <div class="card-icon-box icon-box-purple" style="font-size:32px; font-weight:900; color:#bf5af2; width:80px; height:80px; border-radius:50%;">02</div>
+   415|          <div class="card-text-block">
+   416|            <div class="card-label label-purple">BƯỚC 2</div>
+   417|            <div class="card-body">Agent <span class="neon-purple accent-big">tự động</span> research + code</div>
+   418|          </div>
+   419|        </div>
+   420|      </div>
+   421|      <div class="card card-accent-green" id="step2">
+   422|        <div class="card-with-icon">
+   423|          <div class="card-icon-box icon-box-green" style="font-size:32px; font-weight:900; color:#30d158; width:80px; height:80px; border-radius:50%;">03</div>
+   424|          <div class="card-text-block">
+   425|            <div class="card-label label-green">BƯỚC 3</div>
+   426|            <div class="card-body">Review + <span class="neon-green accent-big">deploy</span> ngay lập tức</div>
+   427|          </div>
+   428|        </div>
+   429|      </div>
+   430|    </div>
+   431|  </div>
+   432|</div>
+   433|
+   434|<!-- ============================================================
+   435|     PATTERN E: Quote Card + CTA
+   436|     Use when: closing slide, call to action, key takeaway
+   437|     ============================================================ -->
+   438|<div class="slide" id="s5">
+   439|  <div class="slide-content" style="justify-content: center; align-items: center;">
+   440|    <div class="card card-accent-cyan" id="quote-card" style="max-width: 900px; padding: 56px 60px; text-align: center;">
+   441|      <div style="font-size: 80px; color: rgba(0,245,212,0.2); font-family: Georgia, serif; line-height: 1; margin-bottom: -10px;">"</div>
+   442|      <p id="quote-text" style="font-size: 40px; line-height: 1.5; color: #f0f0f5; font-style: italic; margin-bottom: 32px;">
+   443|        AI không thay thế bạn — AI giúp bạn <span class="neon-cyan accent-big">làm nhanh hơn</span>
+   444|      </p>
+   445|      <div id="quote-author" style="font-size: 26px; color: #00f5d4; font-weight: 700;">
+   446|        — Claude Opus 4.7
+   447|      </div>
+   448|    </div>
+   449|  </div>
+   450|</div>
+   451|
+   452|<!-- ============================================================
+   453|     JAVASCRIPT — JS-Driven Animation Engine (NO CSS TRANSITIONS)
+   454|     ============================================================ -->
+   455|<script>
+   456|window.AUDIO_DURATION = 36.0; // Update with exact ffprobe duration
+   457|window.slideData = [
+   458|  { id: 's0', start: 0, end: 6.0 },
+   459|  { id: 's1', start: 6.0, end: 12.0 },
+   460|  { id: 's2', start: 12.0, end: 18.0 },
+   461|  { id: 's3', start: 18.0, end: 24.0 },
+   462|  { id: 's4', start: 24.0, end: 30.0 },
+   463|  { id: 's5', start: 30.0, end: 36.0 }
+   464|];
+   465|window.slides = window.slideData;
+   466|
+   467|var currentSlide = -1;
+   468|
+   469|/* === Slide switching (NO CSS transition!) === */
+   470|function applyActiveIndex(idx) {
+   471|  if (idx === currentSlide) return;
+   472|  if (currentSlide >= 0) {
+   473|    var oldEl = document.getElementById(window.slides[currentSlide].id);
+   474|    oldEl.classList.remove('active');
+   475|    resetSlideAnimations(currentSlide);
+   476|  }
+   477|  if (idx >= 0) {
+   478|    var newEl = document.getElementById(window.slides[idx].id);
+   479|    newEl.style.opacity = '0';
+   480|    newEl.style.transform = 'translateY(24px) scale(0.97)';
+   481|    newEl.classList.add('active');
+   482|    currentSlide = idx;
+   483|  }
+   484|}
+   485|
+   486|/* === Reset animated elements when leaving slide === */
+   487|function resetSlideAnimations(idx) {
+   488|  var slideEl = document.getElementById(window.slides[idx].id);
+   489|
+   490|  // Reset all cards
+   491|  var cards = slideEl.querySelectorAll('.card');
+   492|  cards.forEach(function(c) {
+   493|    c.style.opacity = '0';
+   494|    c.style.transform = 'translateY(40px) scale(0.96)';
+   495|  });
+   496|
+   497|  // Reset stats
+   498|  var stats = slideEl.querySelectorAll('.stat-block');
+   499|  stats.forEach(function(s) {
+   500|    s.style.opacity = '0';
+   501|
