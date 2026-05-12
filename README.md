@@ -6,21 +6,24 @@ Premium AI explainer video pipeline: topic → script → TTS → HTML slides �
 
 ```bash
 # 1. Clone
-git clone https://github.com/sonicleez/10x-video-skill.git
+git clone https://github.com/juliusnguyen/10x-video-skill.git
 cd 10x-video-skill
 
-# 2. Install dependencies
+# 2. Install dependencies (Requires LLVM 20+ for local TTS)
 npm install puppeteer chart.js
 pip3 install -r requirements.txt
 
-# 3. Set environment variables
+# 3. Set environment variables (Optional fallback for ITERA102)
 export ITERA102_API_KEY="your_key_here"
 export YOUTUBE_CLIENT_ID="your_client_id"
 export YOUTUBE_CLIENT_SECRET="your_secret"
 export YOUTUBE_REFRESH_TOKEN="your_token"
 
 # 4. Create your video HTML, then:
-ITERA102_API_KEY="$ITERA102_API_KEY" bash scripts/tts.sh 1 minimax
+# Local VieNeu TTS (default)
+bash scripts/tts.sh 1 vieneu
+
+# Validate, Render, Upload
 bash scripts/validate-html.sh video1_example
 node scripts/render-safe.js 1
 python3 scripts/upload_youtube.py 1
@@ -31,7 +34,8 @@ python3 scripts/upload_youtube.py 1
 ```
 ├── SKILL.md                    # Main reference (pipeline + checklist)
 ├── scripts/
-│   ├── tts.sh                  # TTS generation (MiniMax + ElevenLabs)
+│   ├── tts.sh                  # TTS generation (VieNeu + legacy)
+│   ├── tts_vieneu.py           # VieNeu CLI wrapper
 │   ├── render-safe.js          # Puppeteer frame capture → MP4
 │   ├── validate-html.sh        # JS validation (run before render)
 │   ├── clean-assets.sh         # Disk cleanup
@@ -48,7 +52,7 @@ python3 scripts/upload_youtube.py 1
 
 1. **Research** → topic + key points
 2. **Script** → `voices/videoN_name.txt` (Vietnamese, ≥60s)
-3. **TTS** → `scripts/tts.sh` (MiniMax/ElevenLabs)
+3. **TTS** → `scripts/tts.sh` (VieNeu local high-quality)
 4. **Slides** → HTML (v5.1 design system, JS-driven animations)
 5. **Validate** → `scripts/validate-html.sh`
 6. **Render** → `scripts/render-safe.js` (Puppeteer → MP4)
@@ -57,11 +61,18 @@ python3 scripts/upload_youtube.py 1
 9. **Upload** → `scripts/upload_youtube.py`
 10. **Cleanup** → `scripts/clean-assets.sh`
 
-## API Keys Needed
+## Prerequisites
+
+- **Python 3.12+**
+- **LLVM 20+** (Required to build `llvmlite` dependency for `vieneu`)
+- **Node.js** (for Puppeteer rendering)
+- **FFmpeg** (for video processing)
+
+## API Keys (Optional fallback)
 
 | Key | Purpose | Get From |
 |-----|---------|----------|
-| `ITERA102_API_KEY` | TTS (MiniMax + ElevenLabs) | itera102.space |
+| `ITERA102_API_KEY` | Legacy TTS (MiniMax + ElevenLabs) | itera102.space |
 | `YOUTUBE_CLIENT_ID` | YouTube OAuth2 | Google Cloud Console |
 | `YOUTUBE_CLIENT_SECRET` | YouTube OAuth2 | Google Cloud Console |
 | `YOUTUBE_REFRESH_TOKEN` | YouTube OAuth2 | OAuth2 flow |
