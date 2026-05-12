@@ -98,14 +98,19 @@ your-project/
 
 #### 2.1 TTS Voiceover
 ```bash
-ITERA102_API_KEY="your_key" bash scripts/tts.sh <N> [minimax|elevenlabs|elevenlabs-female]
+# Local (VieNeu - Default)
+bash scripts/tts.sh <N> vieneu
+
+# Legacy Remote (ITERA102)
+ITERA102_API_KEY="your_key" bash scripts/tts.sh <N> [minimax|elevenlabs]
 ```
 
 | Provider | Voice | Speed | Notes |
 |----------|-------|-------|-------|
-| `minimax` (default) | Podcast Host (Vietnamese) | 1.1 | Fast, resonant |
-| `elevenlabs` | Ton (male, north) | 1.0 | Warm, ~1.5x longer |
-| `elevenlabs-female` | Man Nghi (female, south) | 1.0 | Calm, ~1.5x longer |
+| `vieneu` (default) | Local high-quality | 1.0 | Standard/Turbo modes |
+| `minimax` | Podcast Host (Vietnamese) | 1.1 | Fast, resonant |
+| `elevenlabs` | Ton (male, north) | 1.0 | Warm |
+| `elevenlabs-female` | Man Nghi (female, south) | 1.0 | Calm |
 
 - Output: `voices/video{N}_{name}_podcast.mp3`
 - **MUST ffprobe duration** → update HTML `AUDIO_DURATION` + `render-safe.js audioDurations`
@@ -160,7 +165,7 @@ python3 -c "from PIL import Image; import numpy as np; arr=np.array(Image.open('
 ```bash
 # SVG → PNG → JPEG pipeline
 # 1. Write SVG with design tokens
-# 2. Convert: /usr/bin/python3 -c "import cairosvg; cairosvg.svg2png(bytestring=open('/tmp/thumb.svg').read().encode(), write_to='/tmp/thumb.png', dpi=150)"
+# 2. Convert: python3 -c "import cairosvg; cairosvg.svg2png(bytestring=open('/tmp/thumb.svg').read().encode(), write_to='/tmp/thumb.png', dpi=150)"
 # 3. ffmpeg -y -i /tmp/thumb.png -q:v 2 thumbnails/videoN_name.jpg
 ```
 ⚠️ SVG text: keep ASCII/English (Vietnamese dấu may not render in SVG without CJK fonts)

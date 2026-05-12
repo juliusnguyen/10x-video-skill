@@ -42,8 +42,8 @@ Not a guess. Run `ffprobe` and use the exact duration.
 ### 10. Min video duration ≥ 60s
 User requirement. Never shorter.
 
-### 11. Use /usr/bin/python3 for upload
-NOT venv python3. `upload_youtube.py` must run with system python.
+### 11. Use python3 for upload
+Use the environment's `python3` (venv). `upload_youtube.py` is compatible with Python 3.12.
 
 ### 12. 5h gap between YouTube uploads
 YouTube algorithm preference. Use `--batch --gap 5`.
@@ -126,6 +126,6 @@ Pexels, Pixabay, Unsplash detect headless browsers. Use CSS dark-gradient backgr
 | 2026-05-11 | ADDED: Remotion render engine cloned to `/root/ai-video-remotion/`. React-based rendering. Puppeteer still legacy fallback. |
 | 2026-04-28 | GenMax key renewed. ElevenLabs Vietnamese voices verified: Ton (male, north), Man Nghi (female, south). |
 | 2026-04-27 | ElevenLabs via GenMax API working. Do NOT use `language_code` for ElevenLabs. |
-| 2026-04-23 | Thumbnail SVG pipeline: cairosvg + `/usr/bin/python3` + ffmpeg. |
+| 2026-04-23 | Thumbnail SVG pipeline: cairosvg + `python3` + ffmpeg. |
 | 2026-04-22 | EzAI provider REMOVED (401). All models → ollama-cloud. |
 | 2026-04-07 | Object.defineProperty pitfall discovered (video9). IIFE syntax variant (video10). |

@@ -11,7 +11,7 @@ cd 10x-video-skill
 
 # 2. Install dependencies
 npm install puppeteer chart.js
-pip3 install Pillow cairosvg
+pip3 install -r requirements.txt
 
 # 3. Set environment variables
 export ITERA102_API_KEY="your_key_here"
