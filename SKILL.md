@@ -87,6 +87,7 @@ your-project/
 - File: `voices/video{N}_{name}.txt`
 - Vietnamese, conversational, ≥60s (~150-200 words)
 - Hook → Key points → CTA
+- **CTA Brand:** Use the "Brand Name" and "CTA Slogan" defined in `GEMINI.md`.
 - No emoji
 
 #### 1.3 Slide Concept

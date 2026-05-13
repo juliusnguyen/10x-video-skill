@@ -1,0 +1,13 @@
+Chào các bạn, để làm chủ AI trong năm 2026, chúng ta không chỉ cần biết chat mà còn cần 5 kỹ năng quan trọng sau đây.
+
+Thứ nhất là Agentic Workflow. Thay vì chỉ dùng một câu lệnh đơn lẻ, bạn hãy học cách thiết kế quy trình để nhiều Agent chuyên biệt phối hợp với nhau, từ nghiên cứu đến thực thi.
+
+Thứ hai là Context Engineering. AI mạnh nhất khi được cung cấp đúng dữ liệu. Bạn cần biết cách tổ chức hệ thống RAG và Semantic Search để AI luôn có đủ ngữ cảnh cần thiết.
+
+Thứ ba là Xác thực và Đánh giá. Đừng tin tuyệt đối vào AI. Bạn phải có khả năng xây dựng các bộ dữ liệu mẫu và quy trình kiểm tra để phát hiện lỗi sai hoặc thiên kiến ngay lập tức.
+
+Thứ tư là Tối ưu hóa chi phí. Mỗi Token đều tốn tiền. Kỹ năng chọn đúng mô hình, từ mô hình nhỏ chạy cục bộ đến mô hình siêu lớn, sẽ giúp bạn tiết kiệm ngân sách đáng kể.
+
+Cuối cùng là Tư duy chiến lược. Dù AI có mạnh đến đâu, con người vẫn là yếu tố quyết định. Bạn cần biết khi nào không nên dùng AI và luôn giữ vai trò kiểm soát cuối cùng.
+
+Đó là 5 skill giúp bạn vượt lên dẫn đầu. Đừng quên nhấn follow 10x Video để cập nhật thêm nhiều mẹo AI hay nhé!

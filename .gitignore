@@ -15,12 +15,12 @@ __pycache__/
 voices.json
 
 # Assets & Output
-output/
-frames_*/
-voices/*.mp3
-voices/*.wav
-!voices/*.txt
-thumbnails/*.jpg
+**/output/
+**/frames_*/
+**/voices/*.mp3
+**/voices/*.wav
+!**/voices/*.txt
+**/thumbnails/*.jpg
 test_audio.wav
 *.png
 *.mp4

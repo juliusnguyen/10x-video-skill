@@ -1,0 +1,13 @@
+Chào các bạn, tháng 5 năm 2026 đang chứng kiến những bước ngoặt lịch sử của ngành AI. Sau đây là Top 5 xu hướng đáng chú ý nhất chỉ trong nửa đầu tháng này.
+
+Thứ nhất, sự thống trị của Agentic Model. Với GPT-5.5 và Claude Opus 4.7, AI không còn chỉ để chat. Giờ đây, chúng là những Agent thực thụ, có khả năng tự động thực thi các tác vụ phức tạp trên hệ điều hành và code toàn bộ dự án mà không cần giám sát.
+
+Thứ hai, kỷ nguyên Interaction Real-time. Thinking Machines Lab vừa công bố mô hình tương tác đồng thời. AI giờ đây có thể nghe, nói và nhìn cùng lúc với độ trễ chỉ 0,4 giây, tạo cảm giác giao tiếp tự nhiên như người với người.
+
+Thứ ba, sự ra đời của các Deployment Company. OpenAI và Anthropic đang chuyển mình từ phòng nghiên cứu thành đối tác thực thi, trực tiếp đưa kỹ sư vào các tập đoàn lớn để tái cấu trúc quy trình làm việc quanh các AI Agent.
+
+Thứ tư là Sovereign AI và Robotics. Các quốc gia đang chạy đua xây dựng hạ tầng AI riêng để bảo mật dữ liệu. Song song đó, các mô hình như NVIDIA GR00T đang giúp Robot đạt tỉ lệ thành công cao gấp 1000 lần trong tự động hóa kho bãi.
+
+Cuối cùng là tập trung vào Độ tin cậy. Các nghiên cứu mới giúp AI biết thừa nhận khi không biết và tự kiểm tra lỗi trước khi phản hồi, giúp giảm thiểu tối đa hiện trạng ảo giác.
+
+Đó là những thông tin nóng hổi nhất. Đừng quên follow 10x Video để không bỏ lỡ bất kỳ xu hướng công nghệ nào nhé!

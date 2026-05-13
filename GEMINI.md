@@ -2,6 +2,10 @@
 
 This project is a premium AI explainer video pipeline.
 
+## Brand Configuration
+- **Brand Name:** "W5G Video"
+- **CTA Slogan:** "Đừng quên follow [Brand Name] để không bỏ lỡ bất kỳ xu hướng công nghệ nào nhé!"
+
 ## Environment
 - **Python:** 3.12 (in `.venv`)
 - **Node.js:** Required for Puppeteer rendering.
@@ -14,6 +18,7 @@ See `SKILL.md` for the full 10x Video Pipeline details.
 Custom commands are located in `.gemini/commands/`.
 
 - `/feature VIDEO-NAME`: Start a new video (branch + folder + history + script stub).
+- `/video VIDEO-NAME`: Autopilot production (Steps 1-7). Runs everything until the video is ready for review.
 - `/plan`: Generate a detailed production plan (saved to subfolder).
 - `/script <N> <topic>`: Research and write a Vietnamese script.
 - `/tts <N> [provider]`: Generate TTS voiceover (VieNeu, MiniMax, or ElevenLabs).

@@ -7,26 +7,26 @@ Usage: `/feature NAME` or `/feature` (will prompt for name).
 
 2. Determine the type and prefix:
    - If it looks like a video (e.g., "AI-NEWS", "TECH-TIPS") or if the user is in "video mode":
-     - Scan `voices/` or `output/` or `production_plans/` for `videoN`.
-     - Prefix: `videoN` (e.g., `video13`).
+     - Scan `production_videos/` for existing `NNNNN-*` folders.
+     - Determine next `N`. Prefix: `videoN`. Padded prefix: `NNNNN` (5 digits).
+     - Construction slug: `NNNNN-NAME` (uppercase, hyphens).
+     - Parent Folder: `production_videos/`.
      - Branch prefix: `production/`.
-     - Folder: `production_plans/`.
    - Otherwise (general feature):
      - Scan `changes/` for `NNN`.
      - Prefix: `NNN` (e.g., `001`).
      - Branch prefix: `changes/`.
      - Folder: `changes/`.
 
-3. Construct slug: `PREFIX-NAME` (uppercase, hyphens).
+3. Create the video directory: `production_videos/NNNNN-NAME/`.
+   - Inside, create subdirectories: `output/`, `production_plans/`, `thumbnails/`, `voices/`.
 
-4. Create the directory: `FOLDER/PREFIX-NAME/`.
+4. Write the prompt/topic to `production_videos/NNNNN-NAME/production_plans/videoN.00-PROMPT.md`.
 
-5. Write the prompt/topic to `FOLDER/PREFIX-NAME/PREFIX.00-PROMPT.md`.
+5. Initialize history: `production_videos/NNNNN-NAME/production_plans/videoN.01-HISTORY.md`.
 
-6. Initialize history: `FOLDER/PREFIX-NAME/PREFIX.01-HISTORY.md`.
+6. For videos: Create a stub script file `production_videos/NNNNN-NAME/voices/videoN_NAME.txt`.
 
-7. For videos: Create a stub script file `voices/PREFIX_NAME.txt`.
+7. Create and switch to the branch: `git checkout -b BRANCH_PREFIXNNNNN-NAME`.
 
-8. Create and switch to the branch: `git checkout -b BRANCH_PREFIXPREFIX-NAME`.
-
-9. Report success and next steps.
+8. Report success and next steps.
