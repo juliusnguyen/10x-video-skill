@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>5 Skill hữu ích khi sử dụng AI</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: #0a0a12;
+  font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  color: #f0f0f5;
+}
+.bg-gradient {
+  position: fixed; top: 0; left: 0; width: 1080px; height: 1920px; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 800px 600px at 10% 15%, rgba(0,245,212,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 800px at 90% 85%, rgba(191,90,242,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 50% 50%, rgba(255,45,85,0.03) 0%, transparent 70%),
+    #0a0a12;
+}
+.progress-bar {
+  position: fixed; bottom: 0; left: 0; height: 6px; z-index: 100;
+  background: linear-gradient(90deg, #00f5d4, #bf5af2, #ff2d55);
+  border-radius: 0 3px 3px 0;
+  width: 0%;
+}
+.slide {
+  display: none;
+  position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; z-index: 10;
+}
+.slide.active { display: flex; }
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 100px 72px 120px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 40px;
+  padding: 10px 24px;
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(240,240,245,0.5);
+  margin-bottom: 40px;
+  width: fit-content;
+  letter-spacing: 2px;
+}
+.badge .badge-num { color: #00f5d4; font-weight: 700; }
+.h1 {
+  font-size: 82px;
+  font-weight: 900;
+  line-height: 1.08;
+  color: #f0f0f5;
+  margin-bottom: 24px;
+  max-width: 940px;
+}
+.subtitle {
+  font-size: 36px;
+  color: rgba(240,240,245,0.55);
+  line-height: 1.4;
+  margin-bottom: 56px;
+}
+.neon-cyan { color: #00f5d4; text-shadow: 0 0 40px rgba(0,245,212,0.35), 0 0 80px rgba(0,245,212,0.15); }
+.neon-purple { color: #bf5af2; text-shadow: 0 0 40px rgba(191,90,242,0.35), 0 0 80px rgba(191,90,242,0.15); }
+.neon-pink { color: #ff2d55; text-shadow: 0 0 40px rgba(255,45,85,0.35), 0 0 80px rgba(255,45,85,0.15); }
+.neon-green { color: #30d158; text-shadow: 0 0 40px rgba(48,209,88,0.35), 0 0 80px rgba(48,209,88,0.15); }
+.neon-orange { color: #ff9f0a; text-shadow: 0 0 40px rgba(255,159,10,0.35), 0 0 80px rgba(255,159,10,0.15); }
+.accent-big { font-size: 44px; font-weight: 900; }
+.cards-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  flex: 1;
+  justify-content: center;
+}
+.card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px 44px;
+  border: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 24px; bottom: 24px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+}
+.card-accent-cyan::before { background: #00f5d4; box-shadow: 0 0 12px rgba(0,245,212,0.5); }
+.card-accent-purple::before { background: #bf5af2; box-shadow: 0 0 12px rgba(191,90,242,0.5); }
+.card-accent-green::before { background: #30d158; box-shadow: 0 0 12px rgba(48,209,88,0.5); }
+.card-accent-pink::before { background: #ff2d55; box-shadow: 0 0 12px rgba(255,45,85,0.5); }
+.card-accent-orange::before { background: #ff9f0a; box-shadow: 0 0 12px rgba(255,159,10,0.5); }
+.card-label {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.label-cyan { color: #00f5d4; }
+.label-purple { color: #bf5af2; }
+.label-green { color: #30d158; }
+.label-pink { color: #ff2d55; }
+.label-orange { color: #ff9f0a; }
+.card-body {
+  font-size: 34px;
+  line-height: 1.5;
+  color: rgba(240,240,245,0.85);
+}
+.card-with-icon { display: flex; align-items: flex-start; gap: 28px; }
+.card-icon-box {
+  width: 72px; height: 72px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.icon-box-cyan { background: rgba(0,245,212,0.12); border: 1px solid rgba(0,245,212,0.25); }
+.icon-box-purple { background: rgba(191,90,242,0.12); border: 1px solid rgba(191,90,242,0.25); }
+.icon-box-green { background: rgba(48,209,88,0.12); border: 1px solid rgba(48,209,88,0.25); }
+</style>
+</head>
+<body>
+<div class="bg-gradient"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="slide" id="s0">
+  <div class="slide-content">
+    <div class="badge"><span class="badge-num">01</span> / 07</div>
+    <h1 class="h1">Làm chủ AI <span class="neon-cyan accent-big">năm 2026</span></h1>
+    <p class="subtitle">Không chỉ là biết chat, bạn cần 5 kỹ năng sau</p>
+    <div class="cards-col">
+      <div class="card card-accent-cyan" id="c0-0">
+        <div class="card-body">Vượt lên dẫn đầu nhờ sự <span class="neon-cyan accent-big">khác biệt</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s1">
+  <div class="slide-content">
+    <div class="badge"><span class="badge-num">02</span> / 07</div>
+    <h1 class="h1">1. Agentic <span class="neon-purple accent-big">Workflow</span></h1>
+    <p class="subtitle">Thiết kế quy trình cho nhiều Agent phối hợp</p>
+    <div class="cards-col">
+      <div class="card card-accent-purple" id="c1-0">
+        <div class="card-body">Từ nghiên cứu đến thực thi <span class="neon-purple accent-big">tự động</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s2">
+  <div class="slide-content">
+    <div class="badge"><span class="badge-num">03</span> / 07</div>
+    <h1 class="h1">2. Context <span class="neon-cyan accent-big">Engineering</span></h1>
+    <p class="subtitle">Cung cấp đúng ngữ cảnh cho AI</p>
+    <div class="cards-col">
+      <div class="card card-accent-cyan" id="c2-0">
+        <div class="card-body">Làm chủ hệ thống <span class="neon-cyan accent-big">RAG & Semantic Search</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s3">
+  <div class="slide-content">
+    <div class="badge"><span class="badge-num">04</span> / 07</div>
+    <h1 class="h1">3. Xác thực & <span class="neon-pink accent-big">Đánh giá</span></h1>
+    <p class="subtitle">Đừng tin tuyệt đối vào kết quả của AI</p>
+    <div class="cards-col">
+      <div class="card card-accent-pink" id="c3-0">
+        <div class="card-body">Phát hiện lỗi sai và <span class="neon-pink accent-big">thiên kiến</span> ngay lập tức</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s4">
+  <div class="slide-content">
+    <div class="badge"><span class="badge-num">05</span> / 07</div>
+    <h1 class="h1">4. Tối ưu hóa <span class="neon-green accent-big">Chi phí</span></h1>
+    <p class="subtitle">Mỗi Token đều tốn tiền của bạn</p>
+    <div class="cards-col">
+      <div class="card card-accent-green" id="c4-0">
+        <div class="card-body">Chọn đúng mô hình để <span class="neon-green accent-big">tiết kiệm ngân sách</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s5">
+  <div class="slide-content">
+    <div class="badge"><span class="badge-num">06</span> / 07</div>
+    <h1 class="h1">5. Tư duy <span class="neon-orange accent-big">Chiến lược</span></h1>
+    <p class="subtitle">Con người luôn là yếu tố quyết định</p>
+    <div class="cards-col">
+      <div class="card card-accent-orange" id="c5-0">
+        <div class="card-body">Biết khi nào <span class="neon-orange accent-big">không nên dùng AI</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s6">
+  <div class="slide-content" style="justify-content: center; align-items: center;">
+    <div class="card card-accent-cyan" id="c6-0" style="text-align: center; padding: 60px;">
+      <h1 class="h1">Follow <span class="neon-cyan">10x Video</span></h1>
+      <p class="subtitle">Để cập nhật thêm nhiều mẹo AI hay!</p>
+    </div>
+  </div>
+</div>
+
+<script>
+window.AUDIO_DURATION = 64.38;
+window.slideData = [
+  { id: 's0', start: 0, end: 8.0 },
+  { id: 's1', start: 8.0, end: 18.0 },
+  { id: 's2', start: 18.0, end: 28.0 },
+  { id: 's3', start: 28.0, end: 38.0 },
+  { id: 's4', start: 38.0, end: 48.0 },
+  { id: 's5', start: 48.0, end: 58.0 },
+  { id: 's6', start: 58.0, end: 64.38 }
+];
+window.slides = window.slideData;
+var currentSlide = -1;
+
+function applyActiveIndex(idx) {
+  if (idx === currentSlide) return;
+  if (currentSlide >= 0) {
+    document.getElementById(window.slides[currentSlide].id).classList.remove('active');
+  }
+  if (idx >= 0) {
+    var newEl = document.getElementById(window.slides[idx].id);
+    newEl.classList.add('active');
+    currentSlide = idx;
+  }
+}
+
+function update(time) {
+  var progress = (time / window.AUDIO_DURATION) * 100;
+  document.getElementById('progressBar').style.width = Math.min(progress, 100) + '%';
+  var activeIdx = -1;
+  for (var i = 0; i < window.slides.length; i++) {
+    if (time >= window.slides[i].start && time < window.slides[i].end) {
+      activeIdx = i; break;
+    }
+  }
+  applyActiveIndex(activeIdx);
+
+  if (activeIdx >= 0) {
+    var s = window.slides[activeIdx];
+    var relTime = time - s.start;
+    var cards = document.getElementById(s.id).querySelectorAll('.card');
+    cards.forEach(function(c, i) {
+      var delay = i * 0.4;
+      var t = Math.max(0, Math.min(1, (relTime - delay) / 0.6));
+      var ease = t * (2 - t);
+      c.style.opacity = ease;
+      c.style.transform = 'translateY(' + (40 * (1 - ease)) + 'px)';
+    });
+  }
+}
+
+window.renderFrame = function(time) { update(time); };
+window.setVideoTime = function(ms) { update(ms / 1000); };
+</script>
+</body>
+</html>

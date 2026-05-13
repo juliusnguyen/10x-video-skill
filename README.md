@@ -15,19 +15,26 @@ pip3 install -r requirements.txt
 
 # 3. Set environment variables (Optional fallback for ITERA102)
 export ITERA102_API_KEY="your_key_here"
-export YOUTUBE_CLIENT_ID="your_client_id"
-export YOUTUBE_CLIENT_SECRET="your_secret"
-export YOUTUBE_REFRESH_TOKEN="your_token"
-
-# 4. Create your video HTML, then:
-# Local VieNeu TTS (default)
-bash scripts/tts.sh 1 vieneu
-
-# Validate, Render, Upload
-bash scripts/validate-html.sh video1_example
-node scripts/render-safe.js 1
-python3 scripts/upload_youtube.py 1
 ```
+
+## AI-Powered Workflow (Gemini CLI)
+
+This project is designed to be used with the **Gemini CLI**. The following custom commands automate the entire pipeline:
+
+- `/feature VIDEO-NAME`: Start a new video (creates branch, folder, and history).
+- `/plan`: Generate a detailed production plan and research.
+- `/video VIDEO-NAME`: **Autopilot mode**. Runs the entire pipeline (1-7) automatically.
+- `/script <N> <topic>`: Research and write a Vietnamese script.
+- `/tts <N>`: Generate high-quality VieNeu voiceover.
+- `/slides <N>`: Create HTML slides using the v5.1 design system.
+- `/validate <N>`: Validate HTML slides for syntax and runtime errors.
+- `/render <N>`: Render slides to MP4 using Puppeteer.
+- `/qc <N>`: Perform Pixel Quality Control.
+- `/thumb <N>`: Generate a high-quality JPEG thumbnail.
+- `/seo <N>`: Generate YouTube metadata (title, description, tags).
+- `/upload <N>`: Upload to YouTube with smart scheduling.
+- `/ship`: Finalize production: update changelog, commit, and merge.
+- `/clean`: Purge temporary assets (frames, temp audio) to save disk space.
 
 ## Directory Structure
 

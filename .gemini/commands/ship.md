@@ -2,31 +2,23 @@ Ship the current feature or video: commit, update changelog, open PR, merge, and
 
 **Steps to execute:**
 
-1. Detect current context from branch name (similar to `/plan`).
+1. Detect current context from branch name (same as `/plan`).
 
-2. Run `/clean` (for videos).
+2. For videos:
+   - Base Directory: `production_videos/NNNNN-NAME/`.
+   - Run `/clean` to remove temporary frames inside the folder.
+   - Update `CHANGELOG.md` using the history file in `production_plans/`.
 
-3. **Update CHANGELOG.md**:
-   - Summarize work from the history file.
-   - Add a new section dated today.
-   - Insert at the top.
-
-4. **Commit everything**:
+3. **Commit everything**:
    ```
    git add .
-   git commit -m "feat(PREFIX): NAME - complete"
+   git commit -m "feat(NNNNN): NAME - complete"
    ```
 
-5. **Create a PR** using `gh pr create`:
-   - Title: `feat(PREFIX): NAME`
-   - Body: Summary from history file.
-   - Target: `main`
+4. **Create a PR** using `gh pr create`.
 
-6. **Merge the PR**:
-   ```
-   gh pr merge --merge --delete-branch
-   ```
+5. **Merge the PR** and delete the branch.
 
-7. **Return to main and pull**.
+6. **Return to main and pull**.
 
-8. Report success.
+7. Report success.
